@@ -3,8 +3,8 @@
 CXX= g++
 CXXFLAGS= -std=c++17
 SFMLFLAGS= -lsfml-graphics -lsfml-window -lsfml-system
-OBJFILES= bin/main.o bin/licence.o bin/mainClass.o bin/mainDraw.o bin/mainUpdate.o
-TARGET= bin/TEMPLATE
+OBJFILES= bin/main.o bin/licence.o bin/mainClass.o bin/mainDraw.o bin/mainUpdate.o bin/mainActions.o
+TARGET= bin/3d-2d.elf
 
 
 all: $(TARGET)
@@ -36,6 +36,10 @@ bin/mainDraw.o: src/mainDraw.cpp src/mainClass.h
 bin/mainUpdate.o: src/mainUpdate.cpp src/mainClass.h
 	@echo MAIN UPDATE:
 	$(CXX) $(CXXFLAGS) src/mainUpdate.cpp -c -o bin/mainUpdate.o
+
+bin/mainActions.o: src/mainActions.cpp src/mainClass.h
+	@echo MAIN ACTIONS:
+	$(CXX) $(CXXFLAGS) src/mainActions.cpp -c -o bin/mainActions.o
 	
 clean:
 	rm -f bin/*

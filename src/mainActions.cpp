@@ -17,40 +17,26 @@ If not, see <https://www.gnu.org/licenses/>.
 
 #include "mainClass.h"
 
-
-MainClass::MainClass(){
-  window.create(sf::VideoMode(123, 123), "WXYZ");
-  mainView=sf::View(sf::FloatRect(0, 0, 123, 123));
-  mainView.setViewport(sf::FloatRect(0, 0, 1, 1));
-  window.setView(mainView);
-
-
-  
-}
-MainClass::~MainClass(){
-}
-
-
-
-void MainClass::startProgram(){
-
-    
-  while(window.isOpen()){
-
-    performActions();
-    
-    update();
-    
-    //drawing 66-15fps 33-30fps 16-60fps 11-90fps 8-120fps 4-240fps 
-    if(clock.getElapsedTime().asMilliseconds()>15){
-      clock.restart();
-      draw();
+void MainClass::performActions(){
+  sf::Event event;
+  while (window.pollEvent(event)){
+    switch(event.type){
+      case sf::Event::Closed:
+        window.close();
+        break;
+      case sf::Event::Resized:
+        //if screen is resized fix the views dimensions
+        {
+          int windowWidth=event.size.width;
+          int windowHeight=event.size.height;
+          
+          mainView.reset(sf::FloatRect(0.f, 0.f, windowWidth, windowHeight));
+        }
+        break;
+      // case blah blah:
+      // / break;
     }
-
-
+    
   }
 
-
 }
-
-
